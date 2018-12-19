@@ -1,0 +1,72 @@
+body {
+			background: #f0f0f0;
+            background:url(../images/5.jpg);
+			height: 100%;
+		}
+		.login-box {
+			position: relative;
+			background: #fff;
+			width: 760px;
+			height: 575px;
+			margin-top: 10%;
+			margin-left: auto;
+			margin-right: auto;
+			border: 1px solid #ddd;
+            background: rgba(255,255,255, 0.2);
+		}
+		.login-box h1 {
+			font-size: 36px;
+			text-align: center;
+			padding-top: 50px;
+			padding-bottom: 30px;
+			color: #3d3d3d !important;
+		}
+		.layui-form {
+			width: 400px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.layui-input {
+			height: 48px;
+			width:100%;
+			margin-top: 30px;
+		}
+		.verify_code {
+			text-align: center;
+		}
+		.verify_code img {
+			padding-top: 10px;
+		}
+		.layui-btn {
+			margin-top: 40px;
+			height:40px;
+			width: 100%;
+			background: #2794eb;
+			border-color:white;
+		}
+		.copright {
+			position: fixed;
+			right: 15px;
+			bottom: 0px;
+			color: #4E5465;
+			text-align: right;
+			padding-left: 15px;
+			padding-bottom: 15px;
+		}
+		/* 适配多设备 */
+		@media screen and (max-width: 768px) {
+			body, html {
+				height: 100%;
+			}
+			.login-box {
+				margin-top: 0px;
+				width: 100%;
+				height: 100%;
+				margin: 0px;
+				padding: 0px;
+				border: 0px;
+			}
+			.layui-form {
+				width: 280px;
+			}
+		}

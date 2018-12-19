@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>系统登录</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<link rel="stylesheet" href="css/layui.css"  media="all">
+		<link rel="stylesheet" href="css/global.css" media="all">
+		<link href="css/login.css" rel="stylesheet">
+		<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" media="all">
+	</head>
+<!-- 引入自定义的js -->
+<script src="js/login.js"></script>
+
+
+	<body>
+		<script src="layui.js" charset="utf-8"></script>
+		<script src="common.js" charset="utf-8"></script>
+		<div class="login-box">
+		<h1 class="text-center"><font style="color:black">OA办公系统</font></h1>
+			<form method="post" id="form_login"  action="index.html" class="layui-form">
+				<div class="emp_no">
+					<input type="text" class="layui-input" id="emp_no" name="emp_no" placeholder="帐号" check="required" info="请输入帐号" />
+				</div>
+				<div class="password">
+					<input class="layui-input" id="password" type="password" name="password" placeholder="密码" info="required" info="请输入密码"/>
+				</div>
+				<div class="verify_code">
+									<div class="layui-form-item hidden">
+						<span class="col-sm-3  layui-form-label"> </span>
+						<div class="col-sm-4 pull-left">
+							<label class="inline  col-sm-1">
+								<input type="checkbox" name="remember" value="1" />
+								<span class="lbl"> </span> 
+							</label>
+							<label for="remember-me">记住账号</label>
+						</div>
+					</div>
+				</div>
+				<div class="login">
+					<button class="layui-btn layui-btn-del" id="login_btn" type="submit">登录</button>
+				</div>
+			</form>
+		</div>
+	</body>
+</html>
