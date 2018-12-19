@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oa.dao.OaDictMapper">
+
+    <!-- 添加一条数据字典记录 -->
+    <insert id="add"
+            parameterType="com.oa.vo.OaDictDTO">
+    	insert into oa_dict_tbl
+    	(
+    		field_name,
+			val,
+			msg,
+			tag,
+			sort
+    	)
+    	values
+    	(
+    		#{field_name},
+			#{val},
+			#{msg},
+			#{tag},
+			#{sort}
+    		
+    	)
+    </insert>
+</mapper>

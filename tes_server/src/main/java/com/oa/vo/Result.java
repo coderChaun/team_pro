@@ -1,4 +1,4 @@
-package com.tarena.vo;
+package com.oa.vo;
 
 import java.io.Serializable;
 
