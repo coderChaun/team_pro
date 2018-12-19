@@ -46,10 +46,6 @@ public class CarouselController {
 					return false;
 				}				
 			});
-		}else{
-			result.setStatus(0);
-			result.setMessage("没有轮播图片");
-			return result;
 		}
 		result.setStatus(1);
 		result.setData(files);

@@ -15,10 +15,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 		          classpath:conf/spring.xml;
-		          classpath:conf/spring_mybatis.xml;
-		          classpath:conf/spring_rabbitmq.xml;
-		          classpath:conf/spring_redis.xml;
-		          classpath:conf/spring_lucene.xml
+		          classpath:conf/spring_mybatis.xml
 		</param-value>
 	</context-param>
 	<!-- spring容器初始化的监听器,会读取全局初始化的数据(xml文件) -->

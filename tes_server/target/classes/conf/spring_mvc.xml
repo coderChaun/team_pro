@@ -20,25 +20,25 @@
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-	<!-- 加载属性文件 -->
-	<context:property-placeholder location="classpath:conf/mysql.properties"/>
-<!--util写法 spring 4推荐写法
- 	<util:properties id="props" location="classpath:conf/page.properties,classpath:conf/url.properties,classpath:conf/ccvideo-config.properties"></util:properties> -->
-	<!-- 此写法等同于util写法,是spring4之前推荐用下面的写法 -->
-	<bean id="props"
-	      class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-		<property name="locations">
-			<list>
-				<value>classpath:conf/page.properties</value>
-				
-			</list>
-		</property>
+	
+	<!-- 在restful模式下,添加静态资源 -->
+	<mvc:resources location="/js/" mapping="/js/**"></mvc:resources>
+	<mvc:resources location="/" mapping="/**"></mvc:resources>
+	<!-- 另一种刨除静态资源的方式
+    <mvc:default-servlet-handler/>
+     -->
+        
+	<!-- 扫描@Controller  -->
+	<context:component-scan  base-package="com.tarena.controller"></context:component-scan>
+	<!-- 解析@RequestMapping注解 -->
+	<mvc:annotation-driven></mvc:annotation-driven>
+	
+	<!-- spring mvc 文件上传 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!--能配置多少个property,可以查文档和查询源代码 -->
+		<!--最大上传文件的大小 -->
+		<property name="maxUploadSize" value="8388608"></property>
+		<property name="resolveLazily" value="true"></property>
 	</bean>
-	
-	
-	
-	<!-- 扫描业务包 -->
-	<context:component-scan base-package="com.tarena.service"></context:component-scan>
-	<!-- 扫描工具包 -->
-	<context:component-scan base-package="com.tarena.util"></context:component-scan>
 </beans>
