@@ -82,7 +82,7 @@
     </bean>
     <!-- 扫描dao包,给mapper接口做jdk的动态代理对象-->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
-        p:basePackage="com.tarena.dao"
+        p:basePackage="com.oa.dao"
 		p:sqlSessionFactoryBeanName="sqlSessionFactory">
     
     </bean>

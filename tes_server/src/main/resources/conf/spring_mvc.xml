@@ -29,7 +29,7 @@
      -->
         
 	<!-- 扫描@Controller  -->
-	<context:component-scan  base-package="com.tarena.controller"></context:component-scan>
+	<context:component-scan  base-package="com.oa.controller"></context:component-scan>
 	<!-- 解析@RequestMapping注解 -->
 	<mvc:annotation-driven></mvc:annotation-driven>
 	
