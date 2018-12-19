@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:int-amqp="http://www.springframework.org/schema/integration/amqp"
+	xmlns:int-stream="http://www.springframework.org/schema/integration/stream"
+	xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/util 
+        http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/jee
+        http://www.springframework.org/schema/jee/spring-jee.xsd
+        http://www.springframework.org/schema/integration
+        http://www.springframework.org/schema/integration/spring-integration.xsd
+        http://www.springframework.org/schema/integration/amqp
+        http://www.springframework.org/schema/integration/amqp/spring-integration-amqp.xsd
+        http://www.springframework.org/schema/integration/stream
+        http://www.springframework.org/schema/integration/stream/spring-integration-stream.xsd
+        http://www.springframework.org/schema/rabbit
+        http://www.springframework.org/schema/rabbit/spring-rabbit-1.5.xsd
+        http://www.springframework.org/schema/websocket
+        http://www.springframework.org/schema/websocket/spring-websocket.xsd">
+	<!-- 用spring来管理redis和jedis的对象 -->
+	<bean id="poolConfig"
+	      class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxIdle" value="${redis.maxIdle}"></property>
+		<property name="maxTotal" value="${redis.maxActive}"></property>
+		<property name="maxWaitMillis" value="${redis.maxWait}"></property>
+		<property name="testOnBorrow" value="${redis.testonBorrow}"></property>
+	</bean>
+	<!-- 连接redis服务器 -->
+	<bean id="jedisConnFactory"
+	      class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+	      p:host-name="${redis.host}"
+	      p:port="${redis.port}"
+	      p:password="${redis.pass}"
+	      p:pool-config-ref="poolConfig"
+	      p:use-pool="true"></bean>
+	<!-- redis template definition -->
+	<bean id="redisTemplage"
+	      class="org.springframework.data.redis.core.RedisTemplate"
+	      p:connection-factory-ref="jedisConnFactory"
+	      p:key-serializer-ref="StringRedisSerializer"
+	      p:hash-key-serializer-ref="StringRedisSerializer"></bean>
+	<!-- 给redis服务器存储数据的时候,需要把数据按照redis的方式序列化 -->
+	<bean id="StringRedisSerializer"
+	      class="org.springframework.data.redis.serializer.StringRedisSerializer"></bean>
+</beans>

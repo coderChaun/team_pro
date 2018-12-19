@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/util 
+        http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	
+	<!-- 加载属性文件 -->
+	<context:property-placeholder location="classpath:conf/mysql.properties,classpath:conf/rabbitmq-global.properties,classpath:conf/redis-config.properties,classpath:conf/lucene-config.properties"/>
+<!--util写法 spring 4推荐写法
+ 	<util:properties id="props" location="classpath:conf/page.properties,classpath:conf/url.properties,classpath:conf/ccvideo-config.properties"></util:properties> -->
+	<!-- 此写法等同于util写法,是spring4之前推荐用下面的写法 -->
+	<bean id="props"
+	      class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="locations">
+			<list>
+				<value>classpath:conf/page.properties</value>
+				<value>classpath:conf/url.properties</value>
+				<value>classpath:conf/ccvideo-config.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	
+	
+	<!-- 扫描业务包 -->
+	<context:component-scan base-package="com.tarena.service"></context:component-scan>
+	<!-- 扫描工具包 -->
+	<context:component-scan base-package="com.tarena.util"></context:component-scan>
+</beans>

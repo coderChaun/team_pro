@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tarena.dao.UserMapper">
+    <!-- role的ResultMap -->
+	<resultMap type="Role" id="roleMap">
+	    <!-- 注意:从表中的外键id,不能跟主表的主键id名字相同 -->
+		<id property="id" column="role_id" />
+		<result property="name" column="role_name"/>
+	</resultMap>
+	<!-- user的resultMap -->
+	<resultMap type="User" id="userMap">
+		<id property="id" column="user_id" jdbcType="VARCHAR"/>
+		<result property="loginName" column="user_loginname" jdbcType="VARCHAR"/>
+		<result property="loginType" column="user_logintype" jdbcType="VARCHAR"/>
+		<result property="nickName" column="user_nickname" jdbcType="VARCHAR"/>
+		<result property="password" column="user_password" jdbcType="VARCHAR"/>
+		<result property="type" column="user_type" jdbcType="INTEGER"/>
+		<result property="head" column="user_head" jdbcType="VARCHAR"/>
+		<result property="score" column="user_score" jdbcType="INTEGER"/>
+		<result property="isLock" column="user_islock" jdbcType="CHAR"/>
+		<result property="pwdState" column="user_pwdstate" jdbcType="VARCHAR"/>
+		<result property="regDate" column="user_regdate" jdbcType="TIMESTAMP"/>
+		<result property="age" column="user_age" jdbcType="INTEGER"/>
+		<result property="sex" column="user_sex" jdbcType="CHAR"/>
+		<result property="introduction" column="user_introduction" jdbcType="VARCHAR"/>
+		<collection property="roles" ofType="Role" 
+		            javaType="java.util.List"
+		            resultMap="roleMap"></collection>
+	</resultMap>
+	<!-- 登录(普通) -->
+	<select id="login"
+	        parameterType="User"
+	        resultMap="userMap">
+		select
+		    u.user_id,
+		    u.user_loginname,
+		    u.user_nickname,
+		    u.user_islock,
+		    u.user_score,
+		    u.user_age,
+		    u.user_sex,
+		    u.user_head,
+		    r.role_id,
+		    r.role_name
+		from (
+		   		select * from t_user
+		   		where user_loginname=#{loginName} and
+		   		      user_password=#{password}
+		     ) u
+		left join t_user_role ur on ur.uid=u.user_id
+		left join t_role r on ur.rid=r.role_id
+	</select>
+	<!-- 根据登录名查询用户id  注册用-->
+    <select id="findUserIdByLoginName"
+            parameterType="java.lang.String"
+            resultType="java.lang.String">
+    	select user_id
+    	from t_user
+    	where user_loginname=#{loginName}
+    </select>	
+    <!-- 添加用户 -->
+    <insert id="addUser"
+            parameterType="User">
+    	insert into t_user
+    	(
+    		user_id,
+    		user_loginname,
+    		user_password
+    	)
+    	values
+    	(
+    		#{id},
+    		#{loginName},
+    		#{password}
+    		
+    	)
+    </insert>
+</mapper>
